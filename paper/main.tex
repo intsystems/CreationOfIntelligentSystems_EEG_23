@@ -8,7 +8,7 @@
 \author{Владимиров Эдуард \\
 	\texttt{vladimirov.ea@phystech.edu} \\	
 	\And
-	бартенев Павел \\
+	Бартенев Павел \\
 	\texttt{example@phystech.edu} \\
 	\And
 	Чумаченко Арина \\
@@ -20,7 +20,7 @@
 \maketitle
 
 \begin{abstract}
-	Это исследование нацелено на продвижение области генеративных моделей декодирования временных рядов и представляет новый подход к улучшению процессов принятия решений в сложных системах. Основная цель состоит в двух аспектах: в принятии информированных классификационных решений и, при необходимости, в их эффективном отклонении на основе критерия отклонения от решения, выведенного из несоответствий в наблюдениях внутри созданных сценариев. Наша работа основана на ключевых предположениях, включая анализ относительно коротких временных рядов с значительными изменчивостями, системными ошибками и сложными взаимосвязями. Кроме того, мы рассматриваем данные, происходящие из разных источников, включая экзогенные факторы, управляемые сигналы, решения и поведенческие паттерны, все это внутри структурированного времени. Мы демонстрируем универсальность нашего подхода через применение в различных областях, таких как анализ спортивных игр, интерфейсы мозг-компьютер и управление рисками. Объединяя эти принципы с нашими генеративными моделями, мы стремимся повысить качество классификации поведения и процессов принятия решений в различных областях, способствуя улучшению понимания и прогнозирования динамических систем.
+	This research endeavors to advance the field of generative time series decoding models, presenting a novel approach to augment decision-making processes in complex systems. The primary objective is twofold: to make informed classification decisions and, when necessary, to proficiently reject them based on a decision-rejecting criterion derived from mismatched observations within generated scenarios. Our work operates under key assumptions, including the analysis of relatively short time series with significant variances, systematic errors, and complex interrelationships. Moreover, we consider data originating from diverse sources, including exogenous factors, controlled signals, decisions, and behavioral patterns, all embedded within a structured timeline. We illustrate the versatility of our approach through applications in diverse domains, such as sports game analysis, brain-computer interfaces, and risk management. By combining these principles with our generative models, we aim to enhance the quality of behavioral classification and decision-making processes across various domains, contributing to improved understanding and prediction of dynamic systems.
 \end{abstract}
 
 
@@ -28,17 +28,17 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Введение}
-	Появление генеративных моделей декодирования временных рядов открывает новую эру усовершенствования процессов принятия решений в различных областях. Это исследование начинает свой путь, чтобы внести свой вклад в это развивающееся направление, черпая вдохновение из недавних достижений в области анализа временных рядов и генеративных моделей.
+	The advent of generative time series decoding models has ushered in a new era of enhanced decision-making processes across diverse domains. This research embarks on a journey to contribute to this burgeoning field, drawing inspiration from recent advancements in the study of time series data and generative models.
 	
-	Несколько важных работ подготовили почву для данного исследования. В работе "Прямые дискриминативные декодерные модели для анализа высокоразмерных динамических нейральных данных" (Резаи и др., 2022) авторы глубоко погружаются в сложности декодирования высокоразмерных нейральных данных, заложив основы для инновационных применений в области интерфейсов мозг-компьютер (ИМК). Кроме того, "Параметрические регрессоры гауссовских процессов" (Янковяк и др., 2020) представляют техники, которые можно интегрировать в нашу генеративную модель для моделирования временных рядов, проявляющих различные изменчивости и систематические ошибки.
+	Several seminal works have paved the way for this exploration. In "Direct Discriminative Decoder Models for Analysis of High-Dimensional Dynamical Neural Data" (Rezaei et al., 2022), the authors delve into the intricacies of decoding high-dimensional neural data, setting the stage for innovative applications in brain-computer interfaces (BCIs). Additionally, "Parametric Gaussian Process Regressors" (Jankowiak et al., 2020) presents techniques that can be integrated into our generative framework to model time series data exhibiting variances and systematic errors.
 	
-	Наша работа выходит за рамки теоретических исследований, нацелена на решение практических задач в сложных системах. Мы представляем критерий отклонения от решения, основанный на несоответствиях в наблюдениях внутри созданных сценариев, концепцию, аналогичную принципу классификации "один класс" из работы "Глубокие прямые дискриминативные декодеры для анализа высокоразмерных временных рядов" (Резаи, 2023). Этот критерий дарит нашим генеративным моделям не только способность принимать информированные классификационные решения, но и эффективно отклонять решения, когда сталкиваются с неожиданными паттернами или выбросами.
+	Our work extends beyond the theoretical realm, aiming to address practical challenges in complex systems. We introduce a decision-rejecting criterion based on mismatched observations within generated scenarios, a concept akin to the one-class classification principle proposed in "Deep Direct Discriminative Decoders for High-dimensional Time-series Data Analysis" (Rezaei, 2023). This criterion empowers our generative models to not only make informed classification decisions but also proficiently reject decisions when confronted with unforeseen patterns or outliers.
 	
-	Кроме того, мы учитываем ряд предположений и сценариев, включая короткие временные ряды, существенные корреляции между временными рядами и структурированные временные линии. Эти предположения соответствуют принципам, рассмотренным в работе "Интуитивное руководство по регрессии гауссовских процессов" (Уанг, 2021), где освещаются основные понятия гауссовских процессов - важного компонента нашего подхода к моделированию.
+	Furthermore, we consider a range of assumptions and scenarios, including short time series data, significant correlations between time series, and structured timelines. These assumptions align with the principles explored in "An Intuitive Tutorial to Gaussian Processes Regression" (Wang, 2021), which elucidates the foundational concepts of Gaussian processes—a crucial component of our modeling approach.
 	
-	Потенциал применения нашего исследования охватывает широкий спектр областей, от анализа спортивных игр до ИМК и управления рисками на финансовых рынках. Комбинируя принципы из этих влиятельных работ с нашими генеративными моделями, мы стремимся внести вклад в усовершенствование процессов принятия решений, классификации поведения и понимание динамических систем в различных областях.
+	The potential applications of our research span a wide spectrum, from sports game analysis to BCIs and risk management in financial markets. By combining the principles from these influential papers with our generative models, we aspire to contribute to the advancement of decision-making processes, behavioral classification, and the understanding of dynamic systems in a multitude of domains..
 	
-	Основная идея: создать модель автокодировщик для генерации сигналов ЭЭГ: кодировщик - модель D4, декодер - модель из семейства SSM, является частью decision-making процесса.
+	The structure of the model: create an autoencoder model for generating EEG signals: the encoder is a D4 model, the decoder is a model from the SSM family and the decoder is a part of the decision-making process. If we can't properly recover video or sound from brain recordings then it means that the generated recording is bad.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Обозначения}
