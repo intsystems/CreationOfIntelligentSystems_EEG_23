@@ -1,158 +1,84 @@
-\documentclass{article}
-\usepackage{arxiv}
+\documentclass[a4paper, 12pt]{article}
 
-\usepackage[utf8]{inputenc}
-\usepackage[english, russian]{babel}
-\usepackage[T1]{fontenc}
-\usepackage{url}
-\usepackage{booktabs}
-\usepackage{amsfonts}
-\usepackage{nicefrac}
-\usepackage{microtype}
-\usepackage{lipsum}
-\usepackage{graphicx}
-\usepackage{natbib}
-\usepackage{doi}
+\input{preamble.tex}
+\renewcommand{\abstractname}{Аннотация}
 
+\title{Генеративные модели декодирования временных рядов}
 
-
-\title{A template for the \emph{arxiv} style}
-
-\author{ David S.~Hippocampus\thanks{Use footnote for providing further
-		information about author (webpage, alternative
-		address)---\emph{not} for acknowledging funding agencies.} \\
-	Department of Computer Science\\
-	Cranberry-Lemon University\\
-	Pittsburgh, PA 15213 \\
-	\texttt{hippo@cs.cranberry-lemon.edu} \\
-	%% examples of more authors
+\author{Владимиров Эдуард \\
+	\texttt{vladimirov.ea@phystech.edu} \\	
 	\And
-	Elias D.~Striatum \\
-	Department of Electrical Engineering\\
-	Mount-Sheikh University\\
-	Santa Narimana, Levand \\
-	\texttt{stariate@ee.mount-sheikh.edu} \\
-	%% \AND
-	%% Coauthor \\
-	%% Affiliation \\
-	%% Address \\
-	%% \texttt{email} \\
-	%% \And
-	%% Coauthor \\
-	%% Affiliation \\
-	%% Address \\
-	%% \texttt{email} \\
-	%% \And
-	%% Coauthor \\
-	%% Affiliation \\
-	%% Address \\
-	%% \texttt{email} \\
+	бартенев Павел \\
+	\texttt{example@phystech.edu} \\
+	\And
+	Чумаченко Арина \\
+	\texttt{example@phystech.edu}
 }
-\date{}
-
-\renewcommand{\shorttitle}{\textit{arXiv} Template}
-
-%%% Add PDF metadata to help others organize their library
-%%% Once the PDF is generated, you can check the metadata with
-%%% $ pdfinfo template.pdf
-\hypersetup{
-pdftitle={A template for the arxiv style},
-pdfsubject={q-bio.NC, q-bio.QM},
-pdfauthor={David S.~Hippocampus, Elias D.~Striatum},
-pdfkeywords={First keyword, Second keyword, More},
-}
+\date{\today}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-	\lipsum[1]
+	Это исследование нацелено на продвижение области генеративных моделей декодирования временных рядов и представляет новый подход к улучшению процессов принятия решений в сложных системах. Основная цель состоит в двух аспектах: в принятии информированных классификационных решений и, при необходимости, в их эффективном отклонении на основе критерия отклонения от решения, выведенного из несоответствий в наблюдениях внутри созданных сценариев. Наша работа основана на ключевых предположениях, включая анализ относительно коротких временных рядов с значительными изменчивостями, системными ошибками и сложными взаимосвязями. Кроме того, мы рассматриваем данные, происходящие из разных источников, включая экзогенные факторы, управляемые сигналы, решения и поведенческие паттерны, все это внутри структурированного времени. Мы демонстрируем универсальность нашего подхода через применение в различных областях, таких как анализ спортивных игр, интерфейсы мозг-компьютер и управление рисками. Объединяя эти принципы с нашими генеративными моделями, мы стремимся повысить качество классификации поведения и процессов принятия решений в различных областях, способствуя улучшению понимания и прогнозирования динамических систем.
 \end{abstract}
 
 
-\keywords{First keyword \and Second keyword \and More}
+\keywords{нейронное кодирование \and нейронное декодирование \and D4 \and SSM}
 
-\section{Introduction}
-\lipsum[2]
-\lipsum[3]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Введение}
+	Появление генеративных моделей декодирования временных рядов открывает новую эру усовершенствования процессов принятия решений в различных областях. Это исследование начинает свой путь, чтобы внести свой вклад в это развивающееся направление, черпая вдохновение из недавних достижений в области анализа временных рядов и генеративных моделей.
+	
+	Несколько важных работ подготовили почву для данного исследования. В работе "Прямые дискриминативные декодерные модели для анализа высокоразмерных динамических нейральных данных" (Резаи и др., 2022) авторы глубоко погружаются в сложности декодирования высокоразмерных нейральных данных, заложив основы для инновационных применений в области интерфейсов мозг-компьютер (ИМК). Кроме того, "Параметрические регрессоры гауссовских процессов" (Янковяк и др., 2020) представляют техники, которые можно интегрировать в нашу генеративную модель для моделирования временных рядов, проявляющих различные изменчивости и систематические ошибки.
+	
+	Наша работа выходит за рамки теоретических исследований, нацелена на решение практических задач в сложных системах. Мы представляем критерий отклонения от решения, основанный на несоответствиях в наблюдениях внутри созданных сценариев, концепцию, аналогичную принципу классификации "один класс" из работы "Глубокие прямые дискриминативные декодеры для анализа высокоразмерных временных рядов" (Резаи, 2023). Этот критерий дарит нашим генеративным моделям не только способность принимать информированные классификационные решения, но и эффективно отклонять решения, когда сталкиваются с неожиданными паттернами или выбросами.
+	
+	Кроме того, мы учитываем ряд предположений и сценариев, включая короткие временные ряды, существенные корреляции между временными рядами и структурированные временные линии. Эти предположения соответствуют принципам, рассмотренным в работе "Интуитивное руководство по регрессии гауссовских процессов" (Уанг, 2021), где освещаются основные понятия гауссовских процессов - важного компонента нашего подхода к моделированию.
+	
+	Потенциал применения нашего исследования охватывает широкий спектр областей, от анализа спортивных игр до ИМК и управления рисками на финансовых рынках. Комбинируя принципы из этих влиятельных работ с нашими генеративными моделями, мы стремимся внести вклад в усовершенствование процессов принятия решений, классификации поведения и понимание динамических систем в различных областях.
+	
+	Основная идея: создать модель автокодировщик для генерации сигналов ЭЭГ: кодировщик - модель D4, декодер - модель из семейства SSM, является частью decision-making процесса.
 
-\section{Headings: first level}
-\label{sec:headings}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Обозначения}
 
-\lipsum[4] See Section \ref{sec:headings}.
+TODO
+%	\begin{itemize}
+%	\end{itemize}
 
-\subsection{Headings: second level}
-\lipsum[5]
-\begin{equation}
-	\xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
-\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Постановка задачи классификации сигнала ЭКоГ}
+TODO
 
-\subsubsection{Headings: third level}
-\lipsum[6]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Обзор литературы}
+TODO
 
-\paragraph{Paragraph}
-\lipsum[7]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Модели пространства состояний}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Вычислительный эксперимент}
+Целью эксперимента является TODO.
 
+\subsection{Экспериментальные данные}
+TODO
 
-\section{Examples of citations, figures, tables, references}
-\label{sec:others}
+\subsection{Условия проведения эксперимента}
+TODO
 
-\subsection{Citations}
-Citations use \verb+natbib+. The documentation may be found at
-\begin{center}
-	\url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
-\end{center}
-
-Here is an example usage of the two main commands (\verb+citet+ and \verb+citep+): Some people thought a thing \citep{kour2014real, hadash2018estimate} but other people thought something else \citep{kour2014fast}. Many people have speculated that if we knew exactly why \citet{kour2014fast} thought this\dots
-
-\subsection{Figures}
-\lipsum[10]
-See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
-\lipsum[11]
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.5\textwidth]{../figures/log_reg_cs_exp.eps}
-	\caption{Sample figure caption.}
-	\label{fig:fig1}
-\end{figure}
-
-\subsection{Tables}
-See awesome Table~\ref{tab:table}.
-
-The documentation for \verb+booktabs+ (`Publication quality tables in LaTeX') is available from:
-\begin{center}
-	\url{https://www.ctan.org/pkg/booktabs}
-\end{center}
+\subsection{Анализ ошибки}
+TODO
 
 
-\begin{table}
-	\caption{Sample table title}
-	\centering
-	\begin{tabular}{lll}
-		\toprule
-		\multicolumn{2}{c}{Part}                   \\
-		\cmidrule(r){1-2}
-		Name     & Description     & Size ($\mu$m) \\
-		\midrule
-		Dendrite & Input terminal  & $\sim$100     \\
-		Axon     & Output terminal & $\sim$10      \\
-		Soma     & Cell body       & up to $10^6$  \\
-		\bottomrule
-	\end{tabular}
-	\label{tab:table}
-\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Заключение}
+TODO.
 
-\subsection{Lists}
-\begin{itemize}
-	\item Lorem ipsum dolor sit amet
-	\item consectetur adipiscing elit.
-	\item Aliquam dignissim blandit est, in dictum tortor gravida eget. In ac rutrum magna.
-\end{itemize}
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addcontentsline{toc}{section}{\protect\numberline{}Список литературы}
 \bibliographystyle{unsrtnat}
-\bibliography{references}
+\bibliography{references.bib}
 
-\end{document}
+\end{document} 
